@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect,useState} from 'react';//hooks for state, lifecycle and memoizing func
 import {jwtDecode} from 'jwt-decode'//decodes jwt to extract user info
 import 'bootstrap/dist/css/bootstrap.min.css';
-import api from '../axios';
+import api from '../services/api';
 
 function Dashboard({token}){
     const authToken=token ||localStorage.getItem('token'); //gets token from props or local storage(for authentication header)

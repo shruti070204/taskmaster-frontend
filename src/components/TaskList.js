@@ -1,12 +1,12 @@
 import React, {useEffect,useState} from "react"; //core react lib, hook for performingside effects(fetching data) after component mounts, hook to add state(vars) to func components
-import API from "../services/api"; //custom axios instance use to make http req weith pre-configured settings
+import api from "../services/api"; //custom axios instance use to make http req weith pre-configured settings
 
 function TaskList(){
     const[tasks,setTasks]=useState([]); //listof task ftech frm be,func to upd task,init as empty arr
 
     useEffect(() =>{//run after components is 1st rendered,fetch tasks from api when component loads
         const token=localStorage.getItem('token') //authenticate user for api calls
-        API.get('tasks/',{ //send get req, fetch task assigned user
+        api.get('tasks/',{ //send get req, fetch task assigned user
             headers:{
                 Authorization:`Bearer ${token}`, //include jwt token
             },

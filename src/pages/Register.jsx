@@ -1,6 +1,6 @@
 import { useState } from 'react'; //manage components like username, emal,password and selected role
 import 'bootstrap/dist/css/bootstrap.min.css';
-import api from '../axios';
+import api from '../services/api';
 
 function Register() {
   const [username, setUsername] = useState('');

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'; //required write react component, to manage local component state
 import {useNavigate} from 'react-router-dom'; //for programmatic navigation
-import api from '../services/api'
+import api from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LoginPage({setToken}){

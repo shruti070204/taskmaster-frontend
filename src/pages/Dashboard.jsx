@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect,useState} from 'react';//hooks for state, lifecycle and memoizing func
-import axios from 'axios';//http client to call backend api
 import {jwtDecode} from 'jwt-decode'//decodes jwt to extract user info
 import 'bootstrap/dist/css/bootstrap.min.css';
+import api from '../axios';
 
 function Dashboard({token}){
     const authToken=token ||localStorage.getItem('token'); //gets token from props or local storage(for authentication header)
@@ -26,7 +26,7 @@ function Dashboard({token}){
             Authorization: `Bearer ${authToken}`
         };
         console.log("auth header:",authHeader);
-        axios.get('http://127.0.0.1:8000/api/tasks/', { //fetch filtered task from be an dupd the state
+        api.get('/tasks/', { //fetch filtered task from be an dupd the state
             headers: authHeader,
             params: {
                 status: statusFilter,
@@ -57,7 +57,7 @@ function Dashboard({token}){
 
     const handleCreateTask = async () => {
         try { //create new task via post 
-            await axios.post('http://127.0.0.1:8000/api/tasks/', {
+            await api.post('/tasks/', {
                 title: newTitle,
                 due_date: newDueDate,
                 priority_level: newPriority,
@@ -75,7 +75,7 @@ function Dashboard({token}){
             setNewPriority('');
             fetchTasks(); //show new task
             // Reload tasks
-            axios.get('http://127.0.0.1:8000/api/tasks/', {
+            api.get('/tasks/', {
                 headers: { Authorization: `Bearer ${authToken}` },
             }).then(res => setTasks(res.data));
     
@@ -93,7 +93,7 @@ function Dashboard({token}){
         if (!window.confirm('Are you sure you want to delete this task?')) return;
         try {
             console.log("Deleting task with ID:", id);
-            await axios.delete(`http://127.0.0.1:8000/api/tasks/${id}/`, {
+            await api.delete(`/tasks/${id}/`, {
                 headers: { Authorization: `Bearer ${authToken}` },
             });
             fetchTasks();
@@ -112,8 +112,8 @@ function Dashboard({token}){
     //save upd using patch and refresh list
     const saveEdit = async (id) => {
         try {
-            await axios.patch(
-                `http://127.0.0.1:8000/api/tasks/${id}/`,
+            await api.patch(
+                `/tasks/${id}/`,
                 {
                     title: editTitle,
                     status: editStatus,

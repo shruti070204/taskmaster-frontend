@@ -1,6 +1,6 @@
 import { useState } from 'react'; //manage components like username, emal,password and selected role
-import axios from 'axios'; // /api/register/
 import 'bootstrap/dist/css/bootstrap.min.css';
+import api from '../axios';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -10,7 +10,7 @@ function Register() {
 
   const handleRegister = async () => { //called when register button is clicked
     try{
-      const response =await axios.post('http://127.0.0.1:8000/api/register/', { //send post requets to jango registrations details
+      const response =await api.post('/register/', { //send post requets to jango registrations details
         username,
         email,
         password,

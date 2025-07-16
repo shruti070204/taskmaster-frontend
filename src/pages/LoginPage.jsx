@@ -1,7 +1,8 @@
 import React, {useState} from 'react'; //required write react component, to manage local component state
-import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom'; //for programmatic navigation
+import api from '../axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 function LoginPage({setToken}){
     const [username, setUsername]=useState('');
@@ -11,7 +12,7 @@ function LoginPage({setToken}){
     const handleLogin=async(e)=>{
         e.preventDefault(); //prevent default submission which reload page
         try{
-            const response=await axios.post('http://127.0.0.1:8000/api/token/',{
+            const response=await axios.post('https://taskmaster-backend-foln.onrender.com/api/token/',{
                 username,
                 password,
             }); //sends post to jango be /token/ endpoint with the user cred to get jwt
